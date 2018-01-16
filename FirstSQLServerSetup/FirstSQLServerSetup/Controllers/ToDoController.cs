@@ -40,11 +40,10 @@ namespace FirstSQLServerSetup.Controllers
 
             return Json(lasttodo);
         }
-
+        [Route("")]
         [Route("list")]
         public IActionResult List([FromQuery] bool isActive)
-        {
-            
+        {            
             return View(Repository.GetActive(isActive));
         }
 
@@ -63,7 +62,7 @@ namespace FirstSQLServerSetup.Controllers
         [HttpPost("add")]
         public IActionResult Add(ToDo todo)
         {
-            todoContext.ToDos.Add(todo);
+            todoContext.Add(todo);
             todoContext.SaveChanges();            
             return Redirect("add");
         }
