@@ -43,9 +43,13 @@ namespace FirstSQLServerSetup.Repository
             Todocontext.SaveChanges();
         }
 
-        public void UpdateToDo(ToDo todoToUpdate)
-        {               
-            Todocontext.ToDos.Update(todoToUpdate);
+        public void UpdateToDo(ToDo todo)
+        {
+            ToDo ToDoToUpdate = Todocontext.ToDos.FirstOrDefault(x => x.Id == todo.Id);
+            ToDoToUpdate.Title = todo.Title;
+            ToDoToUpdate.IsDone = todo.IsDone;
+            ToDoToUpdate.IsUrgent = todo.IsUrgent;
+            Todocontext.ToDos.Update(ToDoToUpdate);
             Todocontext.SaveChanges();
         }        
     }
